@@ -26,6 +26,9 @@ jobs:
       - name: Build and test with Maven
         run: mvn -B -ntp clean verify
 
+      - name: SonarCloud analysis
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=eliasNovice_dockerLabs -Dsonar.organization=eliasnovice -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
   # 2) Build & push des images Docker
   build-and-push-docker-image:
     needs: test-backend
